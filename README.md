@@ -32,3 +32,10 @@ token:
   SEMICOLON
 ]
 ```
+
+##### Writing the Lexer
+
+The lexer will take source code as input and output the tokens that represt the source code. It will go through it's input, and output the next token it recognizes. This will be done using a `NextToken()` method.
+
+
+
