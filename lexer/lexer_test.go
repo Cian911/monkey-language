@@ -8,7 +8,7 @@ import (
 
 func TestNextToken(t *testing.T) {
 	t.Run("Test 1 - Lexer", func(t *testing.T) {
-		input := `=+(){},;`
+		input := `=+(){},;-/*<>!`
 
 		tests := []struct {
 			expectedType    token.TokenType
@@ -22,6 +22,12 @@ func TestNextToken(t *testing.T) {
 			{token.RBRACE, "}"},
 			{token.COMMA, ","},
 			{token.SEMICOLON, ";"},
+			{token.MINUS, "-"},
+			{token.SLASH, "/"},
+			{token.ASTERIX, "*"},
+			{token.LT, "<"},
+			{token.GT, ">"},
+			{token.BANG, "!"},
 			{token.EOF, ""},
 		}
 
@@ -50,6 +56,12 @@ func TestNextToken(t *testing.T) {
      };
 
      let result = add(five, ten);
+
+     if (1 > 2) {
+      return true;
+     } else {
+      return false;
+     }
     `
 
 		tests := []struct {

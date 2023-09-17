@@ -12,6 +12,12 @@ const (
 	// Operators
 	PLUS   = "+"
 	ASSIGN = "="
+	MINUS = "-"
+	BANG = "!"
+	ASTERIX = "*"
+	SLASH = "/"
+	LT = "<"
+	GT = ">"
 
 	// Delimiters
 	COMMA     = ","
@@ -25,6 +31,10 @@ const (
 	// keywords
 	FUNCTION = "FUNCTION"
 	LET      = "LET"
+  TRUE = "true"
+  FALSE = "false"
+  IF = "if"
+  ELSE = "else"
 )
 
 // Specify language keywords
