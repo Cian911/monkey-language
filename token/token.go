@@ -10,14 +10,14 @@ const (
 	INT   = "INT"   // 12345
 
 	// Operators
-	PLUS   = "+"
-	ASSIGN = "="
-	MINUS = "-"
-	BANG = "!"
+	PLUS    = "+"
+	ASSIGN  = "="
+	MINUS   = "-"
+	BANG    = "!"
 	ASTERIX = "*"
-	SLASH = "/"
-	LT = "<"
-	GT = ">"
+	SLASH   = "/"
+	LT      = "<"
+	GT      = ">"
 
 	// Delimiters
 	COMMA     = ","
@@ -31,16 +31,22 @@ const (
 	// keywords
 	FUNCTION = "FUNCTION"
 	LET      = "LET"
-  TRUE = "true"
-  FALSE = "false"
-  IF = "if"
-  ELSE = "else"
+	TRUE     = "true"
+	FALSE    = "false"
+	IF       = "if"
+	ELSE     = "else"
+	RETURN   = "return"
 )
 
 // Specify language keywords
 var keywords = map[string]TokenType{
-	"fn":  FUNCTION,
-	"let": LET,
+	"fn":     FUNCTION,
+	"let":    LET,
+	"if":     IF,
+	"else":   ELSE,
+	"true":   TRUE,
+	"false":  FALSE,
+	"return": RETURN,
 }
 
 // Defining TokenType as a string allows us to use many different values as TokenTypes
