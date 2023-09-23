@@ -5,7 +5,7 @@ import "github.com/cian911/monkey-language/token"
 type Lexer struct {
 	input        string
 	position     int  // Current position in input (current char)
-	readPosition int  // Current reading position in input (after current char)
+	readPosition int  // Current reading position in input (after current char): i.e The _next_ position.
 	ch           byte // Current char being inspected
 }
 
@@ -25,7 +25,14 @@ func (l *Lexer) NextToken() token.Token {
 
 	switch l.ch {
 	case '=':
-		tok = newToken(token.ASSIGN, l.ch)
+		if l.peekChar() == '=' {
+			ch := l.ch                           // Current position
+			l.readChar()                         // Read next position
+			literal := string(ch) + string(l.ch) // ==
+			tok = token.Token{Type: token.EQUALS, Literal: literal}
+		} else {
+			tok = newToken(token.ASSIGN, l.ch)
+		}
 	case '+':
 		tok = newToken(token.PLUS, l.ch)
 	case '(':
@@ -43,7 +50,14 @@ func (l *Lexer) NextToken() token.Token {
 	case '-':
 		tok = newToken(token.MINUS, l.ch)
 	case '!':
-		tok = newToken(token.BANG, l.ch)
+		if l.peekChar() == '=' {
+			ch := l.ch                           // Current position
+			l.readChar()                         // Next position
+			literal := string(ch) + string(l.ch) // !=
+			tok = token.Token{Type: token.NOT_EQUAL, Literal: literal}
+		} else {
+			tok = newToken(token.BANG, l.ch)
+		}
 	case '*':
 		tok = newToken(token.ASTERIX, l.ch)
 	case '/':
@@ -99,6 +113,14 @@ func (l *Lexer) readNumber() string {
 		l.readChar()
 	}
 	return l.input[position:l.position]
+}
+
+func (l *Lexer) peekChar() byte {
+	if l.readPosition >= len(l.input) {
+		return 0
+	} else {
+		return l.input[l.readPosition]
+	}
 }
 
 func isLetter(ch byte) bool {
